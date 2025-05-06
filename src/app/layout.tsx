@@ -26,6 +26,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: `${BRAND_CONSTANT} - ${SLOGAN_CONSTANT}`,
   description: SLOGAN_CONSTANT,
+  manifest: '/site.webmanifest',
 };
 
 /**
@@ -42,7 +43,21 @@ const Layout = async (props: LayoutProps) => {
   // ANCHOR Render
   return (
     <html lang="en">
-      <head></head>
+      <head>
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="96x96"
+          href="/favicon-96x96.png"
+        />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+      </head>
       <Body>
         <ProgressBar>{children}</ProgressBar>
       </Body>
