@@ -1,12 +1,11 @@
 'use client';
 
-import Root from './root';
 import { ReactNode } from 'react';
 import { Poppins, Prompt } from 'next/font/google';
 
 /**
  * ANCHOR Poppins
- * @date 13/04/2025 - 17:42:19
+ * @date 06/05/2025 - 23:33:06
  *
  * @type {*}
  */
@@ -19,7 +18,7 @@ const poppins = Poppins({
 
 /**
  * ANCHOR Prompt
- * @date 24/04/2025 - 22:30:35
+ * @date 06/05/2025 - 23:33:10
  *
  * @type {*}
  */
@@ -32,7 +31,7 @@ const prompt = Prompt({
 
 /**
  * ANCHOR Props
- * @date 24/04/2025 - 22:31:16
+ * @date 06/05/2025 - 23:33:30
  *
  * @typedef {Props}
  */
@@ -42,7 +41,7 @@ type Props = {
 
 /**
  * ANCHOR Body
- * @date 13/04/2025 - 18:04:59
+ * @date 06/05/2025 - 23:33:35
  *
  * @param {Props} props
  * @returns {*}
@@ -63,7 +62,7 @@ const Body = (props: Props) => {
         fontFamily,
         fontStyle: poppins.style.fontStyle,
       }}>
-      <Root>{children}</Root>
+      {children}
     </body>
   );
 };
