@@ -11,6 +11,11 @@
   },
   "dependencies": {
     "@bprogress/next": "^3.2.12",
+    "@emotion/cache": "^11.14.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^7.1.0",
+    "@mui/material-nextjs": "^7.1.0",
     "@teamgather/common": "1.0.2",
     "next": "15.3.1",
     "react": "^19.0.0",
@@ -31,5 +36,9 @@
     "prettier": "^3.5.3",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0"
   }
 }
