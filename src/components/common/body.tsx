@@ -1,7 +1,9 @@
 'use client';
 
+import Header from '@/components/header';
+import Mittraphap from '@/components/fonts/Mittraphap';
 import { ReactNode } from 'react';
-import { Poppins, Prompt } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material/styles';
@@ -19,23 +21,10 @@ const poppins = Poppins({
   preload: true,
 });
 
-/**
- * ANCHOR Prompt
- * @date 06/05/2025 - 23:33:10
- *
- * @type {*}
- */
-const prompt = Prompt({
-  subsets: ['thai'],
-  display: 'swap',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  preload: true,
-});
-
 // font family
 const fontFamily: string = [
   poppins.style.fontFamily,
-  prompt.style.fontFamily,
+  Mittraphap.style.fontFamily,
 ].join(', ');
 
 /**
@@ -78,7 +67,12 @@ const Body = (props: Props) => {
         fontStyle: poppins.style.fontStyle,
       }}>
       <AppRouterCacheProvider>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        <ThemeProvider theme={theme}>
+          <div className="container mx-auto px-4">
+            <Header />
+            <div className="py-10">{children}</div>
+          </div>
+        </ThemeProvider>
       </AppRouterCacheProvider>
     </body>
   );

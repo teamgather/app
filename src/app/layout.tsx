@@ -1,5 +1,6 @@
 import Body from '@/components/common/body';
 import ProgressBar from '@/components/common/progress-bar';
+import '@/assets/styles/globals.css';
 import { LayoutProps } from '@/types/document.type';
 import { BRAND_CONSTANT, SLOGAN_CONSTANT } from '@teamgather/common';
 import { Metadata, Viewport } from 'next';
