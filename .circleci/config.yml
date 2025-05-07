@@ -52,7 +52,6 @@ jobs:
           name: Docker build image
           command: docker build
             --build-arg GITHUB_PERSONAL_ACCESS_TOKEN=$GITHUB_PERSONAL_ACCESS_TOKEN
-            --build-arg RECAPTCHA_SITE_KEY=$RECAPTCHA_SITE_KEY
             --tag $CONTAINER_IMAGE:prod . -f deployment/prod/Dockerfile
 
       - run:
