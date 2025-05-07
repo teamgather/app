@@ -70,7 +70,7 @@ const Body = (props: Props) => {
         <ThemeProvider theme={theme}>
           <div className="container mx-auto px-4">
             <Header />
-            <div className="py-10">{children}</div>
+            <div className="py-8">{children}</div>
           </div>
         </ThemeProvider>
       </AppRouterCacheProvider>

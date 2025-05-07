@@ -1,6 +1,8 @@
 import Link from 'next/link';
+import classNames from 'classnames';
 import { MenuItem } from './menu.interface';
 import { Montserrat } from 'next/font/google';
+import { usePathname } from 'next/navigation';
 
 /**
  * ANCHOR Montserrat
@@ -16,46 +18,43 @@ const montserrat = Montserrat({
 });
 
 /**
+ * ANCHOR Props
+ * @date 07/05/2025 - 17:17:49
+ *
+ * @typedef {Props}
+ */
+type Props = {
+  menu: MenuItem;
+};
+
+/**
  * ANCHOR Menu
  * @date 07/05/2025 - 04:42:12
  *
  * @returns {*}
  */
-const Menu = () => {
-  // menus
-  const menus: MenuItem[] = [
-    {
-      title: 'Projects',
-      pathname: '/projects',
-    },
-    {
-      title: 'Tasks',
-      pathname: '/tasks',
-    },
-    {
-      title: 'Members',
-      pathname: '/members',
-    },
-  ];
+const Menu = (props: Props) => {
+  const { menu } = props;
+
+  const pathname = usePathname();
+  const isActive: boolean = menu.pathname == pathname;
 
   // ANCHOR Render
   return (
-    <div
-      className="flex flex-row items-center space-x-6"
+    <Link
+      href={menu.pathname}
+      className={classNames({
+        'hover:underline underline-offset-4': true,
+        underline: isActive,
+      })}
       style={{
         fontFamily: montserrat.style.fontFamily,
         fontStyle: montserrat.style.fontStyle,
       }}>
-      {menus.map((menu, index) => {
-        return (
-          <Link key={index} href={menu.pathname} className="hover:underline">
-            <span className="text-sm font-medium uppercase tracking-wide">
-              {menu.title}
-            </span>
-          </Link>
-        );
-      })}
-    </div>
+      <span className="text-sm font-medium uppercase tracking-wide">
+        {menu.title}
+      </span>
+    </Link>
   );
 };
 

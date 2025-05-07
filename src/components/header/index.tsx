@@ -1,6 +1,6 @@
 import Auth from './auth';
 import Brand from './brand';
-import Menu from './menu';
+import Navigation from './navigation';
 
 /**
  * ANCHOR Header
@@ -14,7 +14,7 @@ const Header = () => {
     <div className="flex flex-row items-center space-x-10 border-b-2 border-black">
       <div className="flex-1 flex flex-row items-center space-x-12">
         <Brand />
-        <Menu />
+        <Navigation />
       </div>
       <Auth />
     </div>
