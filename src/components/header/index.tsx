@@ -1,6 +1,8 @@
 import Auth from './auth';
 import Brand from './brand';
 import Navigation from './navigation';
+import User from './user';
+import { useAppSelector } from '@/stores/hook';
 
 /**
  * ANCHOR Header
@@ -9,6 +11,8 @@ import Navigation from './navigation';
  * @returns {*}
  */
 const Header = () => {
+  const { isAuthorized } = useAppSelector((state) => state.auth);
+
   // ANCHOR Render
   return (
     <div className="flex flex-row items-center space-x-10 border-b-2 border-black">
@@ -16,7 +20,8 @@ const Header = () => {
         <Brand />
         <Navigation />
       </div>
-      <Auth />
+      {isAuthorized && <User />}
+      {!isAuthorized && <Auth />}
     </div>
   );
 };

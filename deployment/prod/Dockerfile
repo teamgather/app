@@ -18,6 +18,8 @@ ENV NEXT_PUBLIC_ENV_NAME=production
 ENV NEXT_PUBLIC_APP_URL=https://gather.team
 ENV NEXT_PUBLIC_APP_API_URL=https://api.gather.team
 
+ENV NEXT_PUBLIC_AUTH_ACCESS_TOKEN_COOKIE_NAME=mxdbjgkv
+
 # npmrc
 RUN touch ./.npmrc
 RUN echo $'@teamgather:registry=https://npm.pkg.github.com/teamgather\n//npm.pkg.github.com/:_authToken=${GITHUB_PERSONAL_ACCESS_TOKEN}\nregistry=https://registry.npmjs.org/\nlegacy-peer-deps=true' > ./.npmrc
@@ -53,6 +55,8 @@ ENV NEXT_PUBLIC_ENV_NAME=production
 
 ENV NEXT_PUBLIC_APP_URL=https://gather.team
 ENV NEXT_PUBLIC_APP_API_URL=https://api.gather.team
+
+ENV NEXT_PUBLIC_AUTH_ACCESS_TOKEN_COOKIE_NAME=mxdbjgkv
 
 # expose
 EXPOSE 3100

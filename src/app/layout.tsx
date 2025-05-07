@@ -1,9 +1,12 @@
 import Body from '@/components/common/body';
 import ProgressBar from '@/components/common/progress-bar';
+import StoreProvider from '@/stores/provider';
 import '@/assets/styles/globals.css';
 import { LayoutProps } from '@/types/app.type';
-import { BRAND_CONSTANT, SLOGAN_CONSTANT } from '@teamgather/common';
+import { BRAND_CONSTANT, SLOGAN_CONSTANT, UserModel } from '@teamgather/common';
 import { Metadata, Viewport } from 'next';
+import { cookies } from 'next/headers';
+import { axios } from '@/services/axios.service';
 
 /**
  * ANCHOR Viewport
@@ -31,6 +34,61 @@ export const metadata: Metadata = {
 };
 
 /**
+ * ANCHOR Authorized
+ * @date 08/05/2025 - 06:00:11
+ *
+ * @async
+ * @returns {Promise<UserModel | null>}
+ */
+async function Authorized(): Promise<UserModel | null> {
+  'use server';
+
+  // cookies
+  const cookieStore = await cookies();
+
+  // me
+  let me: UserModel | null = null;
+
+  if (cookieStore.has(process.env.NEXT_PUBLIC_AUTH_ACCESS_TOKEN_COOKIE_NAME)) {
+    const accessToken: string = cookieStore.get(
+      process.env.NEXT_PUBLIC_AUTH_ACCESS_TOKEN_COOKIE_NAME,
+    )!.value;
+
+    try {
+      const { data } = await axios.get('user/me', {
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (data.user) {
+        me = data.user;
+      }
+    } catch {}
+  }
+
+  // // header
+  // const header = await headers();
+
+  // // pathname
+  // const pathname = header.get('x-pathname');
+
+  // if (pathname) {
+  //   if (authorized) {
+  //     if (pathname == '/auth/login') {
+  //       redirect('/account');
+  //     }
+  //   } else {
+  //     if (pathname.startsWith('/account')) {
+  //       redirect('/auth/login');
+  //     }
+  //   }
+  // }
+
+  return me;
+}
+
+/**
  * ANCHOR Layout
  * @date 07/05/2025 - 00:41:56
  *
@@ -40,6 +98,12 @@ export const metadata: Metadata = {
  */
 const Layout = async (props: LayoutProps) => {
   const { children } = props;
+
+  // me
+  const me: UserModel | null = await Authorized();
+
+  // is authorized
+  const isAuthorized: boolean = !!me;
 
   // ANCHOR Render
   return (
@@ -59,9 +123,11 @@ const Layout = async (props: LayoutProps) => {
           href="/apple-touch-icon.png"
         />
       </head>
-      <Body>
-        <ProgressBar>{children}</ProgressBar>
-      </Body>
+      <StoreProvider isAuthorized={isAuthorized} me={me}>
+        <Body>
+          <ProgressBar>{children}</ProgressBar>
+        </Body>
+      </StoreProvider>
     </html>
   );
 };

@@ -18,6 +18,8 @@ declare global {
 
       NEXT_PUBLIC_APP_URL: string;
       NEXT_PUBLIC_APP_API_URL: string;
+
+      NEXT_PUBLIC_AUTH_ACCESS_TOKEN_COOKIE_NAME: string;
     }
   }
 }
