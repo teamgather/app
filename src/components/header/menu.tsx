@@ -32,12 +32,16 @@ const Menu = () => {
       title: 'Tasks',
       pathname: '/tasks',
     },
+    {
+      title: 'Members',
+      pathname: '/members',
+    },
   ];
 
   // ANCHOR Render
   return (
     <div
-      className="flex flex-row items-center space-x-5"
+      className="flex flex-row items-center space-x-6"
       style={{
         fontFamily: montserrat.style.fontFamily,
         fontStyle: montserrat.style.fontStyle,

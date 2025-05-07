@@ -12,7 +12,7 @@ const Header = () => {
   // ANCHOR Render
   return (
     <div className="flex flex-row items-center space-x-10 border-b-2 border-black">
-      <div className="flex-1 flex flex-row items-center space-x-10">
+      <div className="flex-1 flex flex-row items-center space-x-12">
         <Brand />
         <Menu />
       </div>
