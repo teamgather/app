@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { axios, AxiosError } from '@/services/axios.service';
 import { nl2br } from 'react-js-nl2br';
 import { COMMON_ERROR_MESSAGE_CONSTANT } from '@/constants/message.constant';
+import { useSearchParams } from 'next/navigation';
 
 /**
  * ANCHOR Props
@@ -54,6 +55,8 @@ const Form = (props: Props) => {
   const [doing, setDoing] = useState<boolean>(false);
   const [done, setDone] = useState<boolean>(false);
 
+  const searchParams = useSearchParams();
+
   /**
    * ANCHOR Submit
    * @date 07/05/2025 - 18:44:23
@@ -75,7 +78,13 @@ const Form = (props: Props) => {
 
       setDone(true);
 
-      window.location.href = '/';
+      let continueUrl: string = '/';
+
+      if (searchParams.get('continue')) {
+        continueUrl = decodeURIComponent(searchParams.get('continue')!);
+      }
+
+      window.location.href = continueUrl;
     } catch (e) {
       if (
         e instanceof AxiosError &&
