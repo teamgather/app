@@ -1,8 +1,14 @@
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Logout from '@mui/icons-material/Logout';
+import Mittraphap from '@/components/fonts/Mittraphap';
 import { useAppSelector } from '@/stores/hook';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { IconButton } from '@mui/material';
 import { Montserrat } from 'next/font/google';
-import Mittraphap from '../fonts/Mittraphap';
+import { useRouter } from 'next/navigation';
+import { useState, MouseEvent } from 'react';
 
 /**
  * ANCHOR Montserrat
@@ -32,6 +38,38 @@ const fontFamily: string = [
 const User = () => {
   const { me } = useAppSelector((state) => state.auth);
 
+  const [anchor, setAnchor] = useState<HTMLElement | null>(null);
+
+  const router = useRouter();
+
+  /**
+   * ANCHOR Open
+   * @date 08/05/2025 - 07:22:34
+   *
+   * @param {MouseEvent<HTMLElement>} e
+   */
+  const _open = (e: MouseEvent<HTMLElement>) => {
+    setAnchor(e.currentTarget);
+  };
+
+  /**
+   * ANCHOR Close
+   * @date 08/05/2025 - 07:20:41
+   */
+  const _close = () => {
+    setAnchor(null);
+  };
+
+  /**
+   * ANCHOR Sign Out
+   * @date 08/05/2025 - 07:23:45
+   */
+  const _signOut = () => {
+    _close();
+
+    router.push('/auth/signout');
+  };
+
   // ANCHOR Render
   return (
     <div className="flex flex-row items-center space-x-3">
@@ -45,9 +83,57 @@ const User = () => {
           {me.name}
         </div>
       )}
-      <IconButton aria-label="fingerprint" color="primary">
+      <IconButton color="primary" onClick={_open}>
         <FaRegUserCircle />
       </IconButton>
+      <Menu
+        anchorEl={anchor}
+        open={!!anchor}
+        onClose={_close}
+        onClick={_close}
+        slotProps={{
+          paper: {
+            elevation: 0,
+            sx: {
+              overflow: 'visible',
+              filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+              mt: 1.5,
+              '& .MuiAvatar-root': {
+                width: 32,
+                height: 32,
+                ml: -0.5,
+                mr: 1,
+              },
+              '&::before': {
+                content: '""',
+                display: 'block',
+                position: 'absolute',
+                top: 0,
+                right: 14,
+                width: 10,
+                height: 10,
+                bgcolor: 'background.paper',
+                transform: 'translateY(-50%) rotate(45deg)',
+                zIndex: 0,
+              },
+            },
+          },
+        }}
+        transformOrigin={{
+          horizontal: 'right',
+          vertical: 'top',
+        }}
+        anchorOrigin={{
+          horizontal: 'right',
+          vertical: 'bottom',
+        }}>
+        <MenuItem className="min-w-40" onClick={_signOut}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          <span className="text-sm">Sign Out</span>
+        </MenuItem>
+      </Menu>
     </div>
   );
 };

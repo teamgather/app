@@ -73,6 +73,8 @@ const Form = (props: Props) => {
         email,
         password: input.password,
       });
+
+      window.location.href = '/';
     } catch (e) {
       if (
         e instanceof AxiosError &&

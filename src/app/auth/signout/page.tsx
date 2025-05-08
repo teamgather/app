@@ -1,11 +1,11 @@
-import Form from './(components)/form';
+import SignOut from './(components)/signout';
 import { TitleUtil } from '@/utils/app.util';
 import { Metadata } from 'next';
 
-const pageTitle: string = 'Sign Up';
+const pageTitle: string = 'Sign Out';
 
 const apiPath: string = 'auth';
-const subPath: string = 'signup';
+const subPath: string = 'signout';
 
 /**
  * ANCHOR Generate Metadata
@@ -32,11 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
  */
 const Page = () => {
   // ANCHOR Render
-  return (
-    <div>
-      <Form apiPath={apiPath} subPath={subPath} />
-    </div>
-  );
+  return <SignOut apiPath={apiPath} subPath={subPath} />;
 };
 
 export default Page;

@@ -2,6 +2,8 @@ import Form from './(components)/form';
 import { TitleUtil } from '@/utils/app.util';
 import { Metadata } from 'next';
 
+const pageTitle: string = 'Sign In';
+
 const apiPath: string = 'auth';
 const subPath: string = 'signin';
 
@@ -15,7 +17,7 @@ const subPath: string = 'signin';
  */
 export async function generateMetadata(): Promise<Metadata> {
   // title
-  const title: string = TitleUtil('Sign In');
+  const title: string = TitleUtil(pageTitle);
 
   return {
     title,
