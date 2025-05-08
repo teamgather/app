@@ -70,6 +70,8 @@ const Form = (props: Props) => {
   const _submit = async (input: Input) => {
     setDoing(true);
 
+    let isSuccess: boolean = false;
+
     try {
       const name: string = input.name.trim();
       const email: string = input.email.trim();
@@ -79,6 +81,12 @@ const Form = (props: Props) => {
         email,
         password: input.password,
       });
+
+      setDone(true);
+
+      cogoToast.success('Your account has been successfully created.');
+
+      isSuccess = true;
     } catch (e) {
       if (
         e instanceof AxiosError &&
@@ -92,6 +100,12 @@ const Form = (props: Props) => {
       }
     } finally {
       setDoing(false);
+    }
+
+    if (isSuccess) {
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1000);
     }
   };
 

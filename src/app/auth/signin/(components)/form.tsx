@@ -43,7 +43,6 @@ const Form = (props: Props) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Input>({
     defaultValues: {
@@ -73,6 +72,8 @@ const Form = (props: Props) => {
         email,
         password: input.password,
       });
+
+      setDone(true);
 
       window.location.href = '/';
     } catch (e) {
