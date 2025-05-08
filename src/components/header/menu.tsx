@@ -37,14 +37,26 @@ const Menu = (props: Props) => {
   const { menu } = props;
 
   const pathname = usePathname();
-  const isActive: boolean = menu.pathname == pathname;
+
+  // is active
+  let isActive: boolean = false;
+
+  if (menu.pathname == '/') {
+    if (menu.pathname == pathname) {
+      isActive = true;
+    }
+  } else {
+    if (pathname.startsWith(menu.pathname)) {
+      isActive = true;
+    }
+  }
 
   // ANCHOR Render
   return (
     <Link
       href={menu.pathname}
       className={classNames({
-        'hover:underline underline-offset-4': true,
+        'hover:underline underline-offset-8': true,
         underline: isActive,
       })}
       style={{
