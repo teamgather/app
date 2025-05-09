@@ -34,7 +34,7 @@ type Props = {
  * @typedef {Input}
  */
 type Input = {
-  name: string;
+  description?: string | null;
 };
 
 /**
@@ -52,7 +52,7 @@ const Form = (props: Props) => {
     formState: { errors },
   } = useForm<Input>({
     defaultValues: {
-      name: project.name,
+      description: project.description || '',
     },
   });
 
@@ -70,11 +70,14 @@ const Form = (props: Props) => {
     setDoing(true);
 
     try {
-      const name: string = input.name.trim();
+      const description: string | null =
+        input.description && input.description.trim()
+          ? input.description.trim()
+          : null;
 
       await axios.put(`${apiPath}/${project.id}/update`, {
-        name,
-        description: project.description,
+        name: project.name,
+        description,
       });
 
       await refetch();
@@ -106,23 +109,23 @@ const Form = (props: Props) => {
       className="flex flex-row items-start space-x-2">
       <div>
         <TextField
-          {...register('name', {
-            required: true,
-            maxLength: 100,
-            validate: (v) => !!v.trim(),
+          {...register('description', {
+            maxLength: 500,
           })}
           slotProps={{
             htmlInput: {
-              maxLength: 100,
+              maxLength: 500,
             },
           }}
           type="text"
-          label="Project Name"
-          placeholder="Specify project name"
+          label="Project description"
+          placeholder="Specify project description"
           helperText="Press ESC to cancel"
           size="small"
+          multiline={true}
+          minRows={3}
           autoFocus={true}
-          error={!!errors.name}
+          error={!!errors.description}
         />
       </div>
       <Button

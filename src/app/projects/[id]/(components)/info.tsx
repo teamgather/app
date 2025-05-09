@@ -2,6 +2,7 @@
 
 import cogoToast from '@dsdeepak17/cogo-toast';
 import Name from './name';
+import Description from './description';
 import { ProjectModel } from '@teamgather/common';
 import { useState } from 'react';
 import { axios, AxiosError } from '@/services/axios.service';
@@ -85,7 +86,9 @@ const Info = (props: Props) => {
       <div className="w-9/12 border border-purple-500">
         <Name project={project} apiPath={apiPath} refetch={_refetch} />
       </div>
-      <div className="w-3/12 border border-orange-500"></div>
+      <div className="w-3/12 border border-orange-500">
+        <Description project={project} apiPath={apiPath} refetch={_refetch} />
+      </div>
     </div>
   );
 };
