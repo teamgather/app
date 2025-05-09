@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 /**
  * ANCHOR Layout Props
- * @date 06/05/2025 - 23:36:43
+ * @date 09/05/2025 - 11:08:35
  *
  * @export
  * @typedef {LayoutProps}
@@ -13,7 +13,7 @@ export type LayoutProps = {
 
 /**
  * ANCHOR Page Params
- * @date 06/05/2025 - 23:37:04
+ * @date 09/05/2025 - 11:07:51
  *
  * @export
  * @typedef {PageParams}
@@ -25,7 +25,7 @@ export type PageParams<P = unknown> = {
 
 /**
  * ANCHOR Page Props
- * @date 06/05/2025 - 23:37:10
+ * @date 09/05/2025 - 11:07:45
  *
  * @export
  * @typedef {PageProps}

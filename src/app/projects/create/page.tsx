@@ -8,7 +8,7 @@ import { redirect } from 'next/navigation';
 const pageTitle: string = 'Projects';
 const subTitle: string = 'Create Project';
 
-const pagePath: string = 'project';
+const pagePath: string = 'projects';
 const apiPath: string = 'project';
 
 /**
