@@ -1,12 +1,12 @@
-import Link from 'next/link';
+import Info from './(components)/info';
 import { TitleUtil } from '@/utils/app.util';
 import { Metadata } from 'next';
-import { Button } from '@mui/material';
 import { ProjectModel } from '@teamgather/common';
 import { cookies } from 'next/headers';
 import { axios } from '@/services/axios.service';
 import { notFound } from 'next/navigation';
 import { PageProps } from '@/types/app.type';
+import { cache } from 'react';
 
 const pageTitle: string = 'Projects';
 
@@ -14,13 +14,11 @@ const apiPath: string = 'project';
 
 /**
  * ANCHOR Project
- * @date 09/05/2025 - 11:10:58
+ * @date 09/05/2025 - 11:42:05
  *
- * @async
- * @param {string} id
- * @returns {Promise<ProjectModel | null>}
+ * @type {*}
  */
-async function Project(id: string): Promise<ProjectModel | null> {
+const Project = cache(async (id: string) => {
   'use server';
 
   // cookies
@@ -48,7 +46,7 @@ async function Project(id: string): Promise<ProjectModel | null> {
   }
 
   return project;
-}
+});
 
 /**
  * ANCHOR Props
@@ -62,15 +60,31 @@ type Props = {
 
 /**
  * ANCHOR Generate Metadata
- * @date 07/05/2025 - 17:49:28
+ * @date 09/05/2025 - 11:42:59
  *
  * @export
  * @async
+ * @param {PageProps<Props>} props
  * @returns {Promise<Metadata>}
  */
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata(
+  props: PageProps<Props>,
+): Promise<Metadata> {
+  const { params } = props;
+  const { id } = await params;
+
+  // titles
+  const titles: string[] = [pageTitle];
+
+  // project
+  const project: ProjectModel | null = await Project(id);
+
+  if (project) {
+    titles.push(project.name);
+  }
+
   // title
-  const title: string = TitleUtil(pageTitle);
+  const title: string = TitleUtil(...titles);
 
   return {
     title,
@@ -79,7 +93,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 /**
  * ANCHOR Page
- * @date 09/05/2025 - 11:10:13
+ * @date 09/05/2025 - 11:36:20
  *
  * @async
  * @param {PageProps<Props>} props
@@ -97,18 +111,7 @@ const Page = async (props: PageProps<Props>) => {
   }
 
   // ANCHOR Render
-  return (
-    <div>
-      <h1 className="mb-6">{pageTitle}</h1>
-      <Button
-        href="/projects/create"
-        LinkComponent={Link}
-        variant="contained"
-        disableElevation={true}>
-        Create Project
-      </Button>
-    </div>
-  );
+  return <Info project={project} pageTitle={pageTitle} apiPath={apiPath} />;
 };
 
 export default Page;
