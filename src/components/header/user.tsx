@@ -1,11 +1,13 @@
+'use client';
+
 import Logout from '@mui/icons-material/Logout';
 import Mittraphap from '@/components/fonts/Mittraphap';
 import { useAppSelector } from '@/stores/hook';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import { Montserrat } from 'next/font/google';
-import { useRouter } from 'next/navigation';
 import { useState, MouseEvent } from 'react';
+import { useRouter } from '@bprogress/next';
 
 /**
  * ANCHOR Montserrat

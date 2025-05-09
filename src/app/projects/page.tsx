@@ -1,9 +1,11 @@
-import Link from 'next/link';
+import List from './(components)/list';
 import { TitleUtil } from '@/utils/app.util';
 import { Metadata } from 'next';
-import { Button } from '@mui/material';
 
 const pageTitle: string = 'Projects';
+
+const pagePath: string = 'projects';
+const apiPath: string = 'project';
 
 /**
  * ANCHOR Generate Metadata
@@ -30,18 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
  */
 const Page = () => {
   // ANCHOR Render
-  return (
-    <div>
-      <h1 className="mb-6">{pageTitle}</h1>
-      <Button
-        href="/projects/create"
-        LinkComponent={Link}
-        variant="contained"
-        disableElevation={true}>
-        Create Project
-      </Button>
-    </div>
-  );
+  return <List pageTitle={pageTitle} pagePath={pagePath} apiPath={apiPath} />;
 };
 
 export default Page;

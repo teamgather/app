@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { nl2br } from 'react-js-nl2br';
 import { Button, TextField } from '@mui/material';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@bprogress/next';
 
 /**
  * ANCHOR Props

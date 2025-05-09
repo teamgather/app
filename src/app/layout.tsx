@@ -1,5 +1,4 @@
 import Body from '@/components/common/body';
-import ProgressBar from '@/components/common/progress-bar';
 import StoreProvider from '@/stores/provider';
 import '@/assets/styles/globals.css';
 import { LayoutProps } from '@/types/app.type';
@@ -68,9 +67,7 @@ const Layout = async (props: LayoutProps) => {
         />
       </head>
       <StoreProvider isAuthorized={isAuthorized} me={me}>
-        <Body>
-          <ProgressBar>{children}</ProgressBar>
-        </Body>
+        <Body>{children}</Body>
       </StoreProvider>
     </html>
   );

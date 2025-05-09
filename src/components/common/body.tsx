@@ -2,6 +2,7 @@
 
 import Header from '@/components/header';
 import Mittraphap from '@/components/fonts/Mittraphap';
+import ProgressBar from './progress-bar';
 import { ReactNode } from 'react';
 import { Poppins } from 'next/font/google';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
@@ -68,10 +69,12 @@ const Body = (props: Props) => {
       }}>
       <AppRouterCacheProvider>
         <ThemeProvider theme={theme}>
-          <div className="container mx-auto px-4">
-            <Header />
-            <div className="py-8">{children}</div>
-          </div>
+          <ProgressBar>
+            <div className="container mx-auto px-4">
+              <Header />
+              <div className="py-8">{children}</div>
+            </div>
+          </ProgressBar>
         </ThemeProvider>
       </AppRouterCacheProvider>
     </body>
