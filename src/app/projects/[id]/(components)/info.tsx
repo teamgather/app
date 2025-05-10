@@ -4,6 +4,7 @@ import cogoToast from '@dsdeepak17/cogo-toast';
 import Name from './name';
 import Description from './description';
 import Options from './options';
+import Members from './members';
 import { MemberModel, ProjectModel } from '@teamgather/common';
 import { useState } from 'react';
 import { axios, AxiosError } from '@/services/axios.service';
@@ -40,7 +41,6 @@ const Info = (props: Props) => {
 
   const [project, setProject] = useState<ProjectModel>(props.project);
 
-  // member owner
   const member: MemberModel | null = ProjectMemberOwnerUtil(project, me);
 
   /**
@@ -108,6 +108,7 @@ const Info = (props: Props) => {
           </span>
         </div>
         <Description project={project} apiPath={apiPath} refetch={_refetch} />
+        <Members project={project} apiPath={apiPath} refetch={_refetch} />
       </div>
     </div>
   );

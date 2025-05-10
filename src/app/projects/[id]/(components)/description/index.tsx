@@ -35,7 +35,6 @@ const Description = (props: Props) => {
   const [mode, setMode] = useState<FormModeEnum | null>(null);
   const [doing, setDoing] = useState<boolean>(false);
 
-  // member owner
   const member: MemberModel | null = ProjectMemberOwnerUtil(project, me);
 
   /**
@@ -72,7 +71,7 @@ const Description = (props: Props) => {
                   <Tooltip title="Click to Edit" placement="top" arrow={true}>
                     <button
                       type="button"
-                      className="cursor-pointer"
+                      className="cursor-pointer hover:underline hover:decoration-dashed"
                       onClick={_edit}>
                       {nl2br(project.description)}
                     </button>
