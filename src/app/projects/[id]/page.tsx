@@ -10,6 +10,7 @@ import { cache } from 'react';
 
 const pageTitle: string = 'Projects';
 
+const pagePath: string = 'projects';
 const apiPath: string = 'project';
 
 /**
@@ -111,7 +112,14 @@ const Page = async (props: PageProps<Props>) => {
   }
 
   // ANCHOR Render
-  return <Info project={project} pageTitle={pageTitle} apiPath={apiPath} />;
+  return (
+    <Info
+      project={project}
+      pageTitle={pageTitle}
+      pagePath={pagePath}
+      apiPath={apiPath}
+    />
+  );
 };
 
 export default Page;

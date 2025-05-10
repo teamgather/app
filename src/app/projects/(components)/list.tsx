@@ -92,7 +92,7 @@ const List = (props: Props) => {
   // ANCHOR Render
   return (
     <>
-      <div className="border border-red-500 flex flex-row items-center">
+      <div className="flex flex-row items-center">
         <h1 className="flex-1 mb-6">
           {pageTitle} ({projects.length})
         </h1>

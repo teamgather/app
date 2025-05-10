@@ -35,6 +35,9 @@ const Description = (props: Props) => {
   const [mode, setMode] = useState<FormModeEnum | null>(null);
   const [doing, setDoing] = useState<boolean>(false);
 
+  // member owner
+  const member: MemberModel | null = ProjectMemberOwnerUtil(project, me);
+
   /**
    * ANCHOR Edit
    * @date 09/05/2025 - 12:22:47
@@ -56,9 +59,6 @@ const Description = (props: Props) => {
       _done();
     }
   });
-
-  // member owner
-  const member: MemberModel | null = ProjectMemberOwnerUtil(project, me);
 
   // ANCHOR Render
   return (

@@ -3,12 +3,16 @@
 import cogoToast from '@dsdeepak17/cogo-toast';
 import Name from './name';
 import Description from './description';
-import { ProjectModel } from '@teamgather/common';
+import Options from './options';
+import { MemberModel, ProjectModel } from '@teamgather/common';
 import { useState } from 'react';
 import { axios, AxiosError } from '@/services/axios.service';
 import { COMMON_ERROR_FETCH_MESSAGE_CONSTANT } from '@/constants/message.constant';
 import { nl2br } from 'react-js-nl2br';
 import { TitleUtil } from '@/utils/app.util';
+import { MomentDateTimeUtil } from '@/utils/moment.util';
+import { useAppSelector } from '@/stores/hook';
+import { ProjectMemberOwnerUtil } from '@/utils/project.util';
 
 /**
  * ANCHOR Props
@@ -19,6 +23,7 @@ import { TitleUtil } from '@/utils/app.util';
 type Props = {
   project: ProjectModel;
   pageTitle: string;
+  pagePath: string;
   apiPath: string;
 };
 
@@ -30,9 +35,13 @@ type Props = {
  * @returns {*}
  */
 const Info = (props: Props) => {
-  const { pageTitle, apiPath } = props;
+  const { pageTitle, pagePath, apiPath } = props;
+  const { me } = useAppSelector((state) => state.auth);
 
   const [project, setProject] = useState<ProjectModel>(props.project);
+
+  // member owner
+  const member: MemberModel | null = ProjectMemberOwnerUtil(project, me);
 
   /**
    * ANCHOR Fetch
@@ -86,7 +95,18 @@ const Info = (props: Props) => {
       <div className="w-9/12 border border-purple-500">
         <Name project={project} apiPath={apiPath} refetch={_refetch} />
       </div>
-      <div className="w-3/12 border border-orange-500">
+      <div className="w-3/12 flex flex-col items-start space-y-4 border border-orange-500">
+        {member && (
+          <div className="flex flex-row justify-end w-full">
+            <Options project={project} pagePath={pagePath} apiPath={apiPath} />
+          </div>
+        )}
+        <div className="flex flex-row items-start space-x-3 text-sm w-full border border-red-500">
+          <strong className="font-semibold">Created At</strong>
+          <span className="flex-1 text-right">
+            {MomentDateTimeUtil(project.createdAt)}
+          </span>
+        </div>
         <Description project={project} apiPath={apiPath} refetch={_refetch} />
       </div>
     </div>
